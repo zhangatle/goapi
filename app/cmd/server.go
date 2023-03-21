@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/cobra"
 	"goapi/bootstrap"
@@ -9,7 +10,7 @@ import (
 	"goapi/pkg/logger"
 )
 
-// CmdServe represents the available web sub-command.
+// ServeCmd represents the available web sub-command.
 var ServeCmd = &cobra.Command{
 	Use:   "serve",
 	Short: "Start web server",
@@ -31,8 +32,11 @@ func runWeb(cmd *cobra.Command, args []string) {
 	// 初始化路由绑定
 	bootstrap.SetupRoute(router)
 
+	fmt.Println("api server running on port " + config.Get("app.port"))
+
 	// 运行服务器
 	err := router.Run(":" + config.Get("app.port"))
+
 	if err != nil {
 		logger.ErrorString("CMD", "serve", err.Error())
 		console.Exit("Unable to start server, error:" + err.Error())
