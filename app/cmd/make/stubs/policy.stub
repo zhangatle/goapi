@@ -1,0 +1,16 @@
+package policies
+
+import (
+    "goapi/app/models/{{PackageName}}"
+    "goapi/pkg/auth"
+    "github.com/gin-gonic/gin"
+)
+
+func CanModify{{StructName}}(c *gin.Context, {{VariableName}}Model {{PackageName}}.{{StructName}}) bool {
+    return auth.CurrentUID(c) == {{VariableName}}Model.UserID
+}
+
+// func CanView{{StructName}}(c *gin.Context, {{VariableName}}Model {{PackageName}}.{{StructName}}) bool {}
+// func CanCreate{{StructName}}(c *gin.Context, {{VariableName}}Model {{PackageName}}.{{StructName}}) bool {}
+// func CanUpdate{{StructName}}(c *gin.Context, {{VariableName}}Model {{PackageName}}.{{StructName}}) bool {}
+// func CanDelete{{StructName}}(c *gin.Context, {{VariableName}}Model {{PackageName}}.{{StructName}}) bool {}
